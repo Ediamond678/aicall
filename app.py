@@ -105,7 +105,7 @@ def make_bulk_call_api(uploaded_file, task, transfer_phone_number):
         df = pd.read_csv(uploaded_file)
         if "Phone" in df.columns and "Cell Phone" in df.columns:
             for index, row in df.iterrows():
-                phone_number = "+" + str(row["Phone"] if pd.notna(row["Phone"]) else row["Cell Phone"])
+                phone_number = "+1" + str(row["Phone"] if pd.notna(row["Phone"]) else row["Cell Phone"])
                 task_prompt = task.format(
                     first_name=row["First Name"],
                     last_name=row["Last Name"],
