@@ -93,7 +93,9 @@ def call_logs():
 # Function to make a single call using API
 def make_single_call_api(phone_number, task, transfer_phone_number):
     headers = {"Authorization": API_KEY}
-    data = {"phone_number": phone_number, "task": task, "voice": "e1289219-0ea2-4f22-a994-c542c2a48a0f", "transfer_phone_number": transfer_phone_number}
+    phone_call = "+1"+ phone_number
+    transfer_call = "+1" + transfer_phone_number
+    data = {"phone_number": phone_call, "task": task, "voice": "e1289219-0ea2-4f22-a994-c542c2a48a0f", "transfer_phone_number": transfer_call}
     response = requests.post("https://api.bland.ai/v1/calls", data=data, headers=headers)
     st.write(response.json())
     return response
@@ -126,7 +128,8 @@ def make_bulk_call_api(uploaded_file, task, transfer_phone_number):
                     zip_code4=row["Zip Code 4"],
                     square_footage=row["Square Footage"]
                 )
-                data = {"phone_number": phone_number, "task": task_prompt, "transfer_phone_number": transfer_phone_number}
+                transfer_call = "+1" + transfer_phone_number
+                data = {"phone_number": phone_number, "task": task_prompt, "transfer_phone_number": transfer_call}
                 response = requests.post("https://api.bland.ai/v1/calls", data=data, headers=headers)
                 st.write(response.json())  # You can modify this to handle the responses as needed
             return response
